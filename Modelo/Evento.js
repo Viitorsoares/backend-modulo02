@@ -1,4 +1,4 @@
-import EventoDAO from "../Percistencia/EventoDAO";
+import EventoDAO from "../Percistencia/EventoDAO.js";
 
 
 export default class Evento {
@@ -54,8 +54,8 @@ export default class Evento {
         return this.#endereco;
     }
 
-    set endereco(NovoEndereco) {
-        this.#endereco = NovoEndereco;
+    set endereco(novoEndereco) {
+        this.#endereco = novoEndereco;
     }
 
     get descricao() {
@@ -84,5 +84,20 @@ export default class Evento {
     async consultar(termoDePesquisa) {
         const dao = new EventoDAO();
         return await dao.consultar(termoDePesquisa);
+    }
+
+    toString() {
+        return `Evento código: ${this.#codigo} - título: ${this.titulo}`
+    }
+
+    toJSON() {
+        return{
+            "codigo": this.#codigo,
+            "titulo": this.#titulo,
+            "data_evento": this.#data_evento,
+            "valor_ingreco": this.#valor_ingreco,
+            "endereco": this.#endereco,
+            "descricao": this.#descricao
+        }
     }
 }

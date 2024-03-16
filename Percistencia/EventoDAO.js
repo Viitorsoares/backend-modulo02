@@ -22,7 +22,7 @@ export default class EventoDAO {
     async atualizar(evento) {
         if (evento instanceof Evento) {
             const conexao = await conectar();
-            const sql = `UPDATE evento SET titulo = ?, data_evento = ?, valor_ingreco = ?, endereco = ?, descricao = ? WHERE codigo = ?`;
+            const sql = `UPDATE evento SET titulo = ?, data_evento = ?, valor_ingreco = ?, endereco = ?, descricao = ? WHERE id = ?`;
             const parametros = [
                 evento.titulo,
                 evento.data_evento,
@@ -39,7 +39,7 @@ export default class EventoDAO {
     async excluir(evento) {
         if (evento instanceof Evento) {
             const conexao = await conectar();
-            const sql = `DELETE FROM evento WHERE codigo = ?`;
+            const sql = `DELETE FROM evento WHERE id = ?`;
             const parametros = [
                 evento.codigo
             ];
@@ -54,10 +54,11 @@ export default class EventoDAO {
         }
         let sql = "";
         if (isNaN(termoDePesquisa)) {
-            sql = `SELECT * FROM evento WHERE nome LIKE '%?%'`;
+            sql = `SELECT * FROM evento WHERE endereco LIKE ?`;
+            termoDePesquisa= '%' + termoDePesquisa + '%';
         }
         else {
-            sql = `SELECT * FROM evento WHERE codigo = ?`;
+            sql = `SELECT * FROM evento WHERE id = ?`;
         }
 
         const conexao = await conectar();
@@ -66,7 +67,7 @@ export default class EventoDAO {
         let listaEventos = [];
         for (const registro of registros) {
             const evento = new Evento(
-                registro.codigo,
+                registro.id,
                 registro.titulo,
                 registro.data_evento,
                 registro.valor_ingreco,

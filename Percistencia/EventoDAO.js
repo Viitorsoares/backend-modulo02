@@ -54,7 +54,7 @@ export default class EventoDAO {
         }
         let sql = "";
         if (isNaN(termoDePesquisa)) {
-            sql = `SELECT * FROM evento WHERE endereco LIKE ?`;
+            sql = `SELECT * FROM evento WHERE titulo LIKE ?`;
             termoDePesquisa= '%' + termoDePesquisa + '%';
         }
         else {

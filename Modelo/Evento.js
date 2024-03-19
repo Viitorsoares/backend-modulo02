@@ -87,7 +87,7 @@ export default class Evento {
     }
 
     toString() {
-        return `Evento código: ${this.#codigo} - título: ${this.titulo}`
+        return `Evento código: ${this.#codigo} - título: ${this.#titulo}`;
     }
 
     toJSON() {

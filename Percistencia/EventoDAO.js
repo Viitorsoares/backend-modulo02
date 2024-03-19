@@ -44,7 +44,7 @@ export default class EventoDAO {
                 evento.codigo
             ];
             
-            await conexao.execute(sql,parametros)
+            await conexao.execute(sql,parametros);
         }
     }
 
@@ -53,7 +53,7 @@ export default class EventoDAO {
             termoDePesquisa = "";
         }
         let sql = "";
-        if (isNaN(termoDePesquisa)) {
+        if (isNaN(parseInt(termoDePesquisa))) {
             sql = `SELECT * FROM evento WHERE titulo LIKE ?`;
             termoDePesquisa= '%' + termoDePesquisa + '%';
         }
